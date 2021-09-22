@@ -1,0 +1,82 @@
+00080000 N _stack
+02000000 A __eheap_start
+02000000 A __end__
+02000000 A __ewram_end
+02000000 D __ewram_start
+02000000 A __sbss_end__
+02000000 A __sbss_start__
+02040000 T __eheap_end
+03000000 A __bss_start
+03000000 A __bss_start__
+03000000 A __iwram_end__
+03000000 T __iwram_start
+03000000 A __iwram_start__
+03000000 b completed.1
+03000004 b object.0
+0300001c 00000004 B fake_heap_end
+03000020 A __bss_end__
+03000020 A __data_start__
+03000020 d __frame_dummy_init_array_entry
+03000020 A __init_array_start
+03000020 A __preinit_array_end
+03000020 A __preinit_array_start
+03000024 d __do_global_dtors_aux_fini_array_entry
+03000024 A __fini_array_start
+03000024 A __init_array_end
+03000028 A __data_end__
+03000028 A __fini_array_end
+03000028 D __iheap_start
+03000028 D __iwram_overlay_end
+03000028 D __iwram_overlay_start
+03007f00 A __sp_usr
+03007fa0 A __sp_irq
+03007ff8 A __irq_flags
+03008000 T __iwram_top
+08000000 T __text_start
+08000000 T _start
+080000c0 t rom_header_end
+080000c4 T __boot_method
+080000c5 T __slave_number
+080000e0 T start_vector
+08000126 t DoEWRAMClear
+08000130 t SkipEWRAMClear
+08000166 t CIW0Skip
+08000170 t CEW0Skip
+08000186 t ClearMem
+08000190 t ClrLoop
+08000196 t ClearMX
+08000198 t _blx_r3_stub
+0800019a t CopyMemChk
+0800019c t CopyMem
+080001a4 t CIDLoop
+080001ac t CIDExit
+08000210 T _init
+0800021c t __do_global_dtors_aux
+08000248 t frame_dummy
+0800026c 00000060 T setup_display
+080002cc 00000038 T setup_ppu_tests
+08000304 0000000c T main_loop
+08000310 00000010 T main
+08000320 0000004e T __libc_init_array
+08000370 000000a6 T memcpy
+08000418 T __text_end
+08000418 T _fini
+08000424 00000020 R acidPal
+08000444 00000500 R acidMap
+08000944 00000220 R acidTiles
+08000b64 r 
+08000b64 r __FRAME_END__
+08000b64 R __exidx_end
+08000b64 R __exidx_start
+08000b68 A __data_lma
+08000b68 A __init_lma
+08000b68 R __iwram_lma
+08000b68 A __preinit_lma
+08000b6c A __fini_lma
+08000b70 A __ewram_lma
+08000b70 A __iwram_overlay_lma
+08000b70 A __jcr_lma
+08000b70 A __load_start_iwram0
+08000b70 A __load_stop_iwram0
+08000b70 A __pad_lma
+08000b78 A __rom_end__
