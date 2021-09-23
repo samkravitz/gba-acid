@@ -57,8 +57,19 @@ inline void wait_for_hblank()
 
 inline void run_hblank_routine() 
 {
-    switch (REG_VCOUNT + 1) // vcount + 1 because any edits during the nth scanline's hblank would modify the (n + 1)th scanline
+    // vcount + 1 because any edits during the nth scanline's hblank would modify the (n + 1)th scanline
+    int editted_scanline = (REG_VCOUNT >= 160) ? 0 : (REG_VCOUNT + 1);
+    
+    switch (editted_scanline)
     {
+        case 0: 
+            REG_BG0VOFS = 50;
+            break;
+        
+        case 1:
+            REG_BG0VOFS = 0;
+            break;
+            
         case 8 ... 16: // idk some dummy test to make sure this is working
             REG_BG0HOFS = 256; // yeet
             break;
