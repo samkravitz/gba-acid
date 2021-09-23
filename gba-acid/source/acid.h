@@ -4,12 +4,11 @@
 //======================================================================
 //
 //	acid, 256x160@4, 
-//	+ palette 16 entries, not compressed
 //	+ 17 tiles (t|f reduced) not compressed
 //	+ regular map (flat), not compressed, 32x20 
-//	Total size: 32 + 544 + 1280 = 1856
+//	Total size: 544 + 1280 = 1824
 //
-//	Time-stamp: 2021-09-22, 11:21:45
+//	Time-stamp: 2021-09-23, 00:50:53
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.16
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -23,9 +22,6 @@ extern const unsigned int acidTiles[136];
 
 #define acidMapLen 1280
 extern const unsigned short acidMap[640];
-
-#define acidPalLen 32
-extern const unsigned short acidPal[16];
 
 #endif // GRIT_ACID_H
 

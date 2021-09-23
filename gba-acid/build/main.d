@@ -15,7 +15,9 @@ main.o: \
  /Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/../tonclib/include/tonc_video.h \
  /Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/../tonclib/include/tonc_nocash.h \
  /Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/../tonclib/include/tonc_text.h \
- /Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/source/acid.h
+ /Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/source/acid.h \
+ /Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/source/mole.h \
+ /Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/source/shared.h
 /Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/../tonclib/include/tonc.h:
 /Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/../tonclib/include/tonc_types.h:
 /Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/../tonclib/include/tonc_memmap.h:
@@ -32,3 +34,5 @@ main.o: \
 /Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/../tonclib/include/tonc_nocash.h:
 /Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/../tonclib/include/tonc_text.h:
 /Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/source/acid.h:
+/Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/source/mole.h:
+/Users/zaydqumsieh/Documents/Programming/gba-acid/gba-acid/source/shared.h:

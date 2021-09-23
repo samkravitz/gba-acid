@@ -4,12 +4,11 @@
 //======================================================================
 //
 //	acid, 256x160@4, 
-//	+ palette 16 entries, not compressed
 //	+ 17 tiles (t|f reduced) not compressed
 //	+ regular map (flat), not compressed, 32x20 
-//	Total size: 32 + 544 + 1280 = 1856
+//	Total size: 544 + 1280 = 1824
 //
-//	Time-stamp: 2021-09-22, 11:21:45
+//	Time-stamp: 2021-09-23, 00:50:53
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.16
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -129,12 +128,6 @@ const unsigned short acidMap[640] __attribute__((aligned(4))) __attribute__((vis
 	0x0001,0x0001,0x0001,0x0001,0x0000,0x0000,0x0000,0x0000,
 	0x0000,0x0000,0x0001,0x0001,0x0001,0x0001,0x0001,0x0001,
 	0x0001,0x0001,0x0001,0x0001,0x0001,0x0001,0x0008,0x0008,
-};
-
-const unsigned short acidPal[16] __attribute__((aligned(4))) __attribute__((visibility("hidden")))=
-{
-	0x0000,0x001F,0x5947,0x4CBF,0x13E0,0x1FBF,0x7FFF,0x0000,
-	0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
 };
 
 //}}BLOCK(acid)

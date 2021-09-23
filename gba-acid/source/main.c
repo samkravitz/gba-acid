@@ -1,57 +1,80 @@
 #include <stdio.h>
 #include <tonc.h>
 #include "acid.h"
+#include "mole.h"
+#include "shared.h"
 
 #include <string.h>
 
 // Use this command to convert acid.png into acid.c and acid.h
-// grit acid.png -gB4 -m -ftc -pu8 -W2
+// bash generate-graphics-data.sh
 
 const u8 PALETTE_MOLE_INDEX = 240;
+const u8 ACID_SCREENBLOCK   = 30; // the screenblock where the acid image will be loaded into
+const u8 ACID_CHARBLOCK     = 0;  // ditto, but the charblock
+
+const u8 MOSAIC_MOLE_TILE_X = 13; // the tile_x loc of the mosaic mole bug on the screenblock
+const u8 MOSAIC_MOLE_TILE_Y = 13;  // the tile_x loc of the mosaic mole bug on the screenblock
+
+u8 num_tiles_loaded = 0;
+void load_tiles(const u32 tiles[], u32 len, uint base_tile) 
+{
+    memcpy(&tile_mem[ACID_CHARBLOCK][base_tile], tiles, len);
+}
+
+void load_pal(const u16 pal[], u32 len) 
+{
+    memcpy(pal_bg_mem, pal, len);
+}
 
 void setup_display() 
 {
-	// Load palette
-    memcpy(pal_bg_mem, acidPal, acidPalLen);
-    // Load tiles into CBB 0
-    memcpy(&tile_mem[0][0], acidTiles, acidTilesLen);
-    // Load map into SBB 30
-    memcpy(&se_mem[30][0], acidMap, acidMapLen);
+    // load the acid.bmp tilemap
+    memcpy(se_mem[ACID_SCREENBLOCK], acidMap, acidMapLen);
 
-    // set up BG0 for a 4bpp 32x32t map, using
-    // using charblock 0 and screenblock 31
-    REG_BG0CNT = BG_CBB(0) | BG_SBB(30) | BG_4BPP | BG_REG_32x32;
+    // load the palette / tiles
+    load_pal  (sharedPal, sharedPalLen);
+    load_tiles(acidTiles, acidTilesLen, 0);
+    load_tiles(moleTiles, moleTilesLen, 32);
+    
+    // set up BG0 for a 4bpp 32x32t map
+    REG_BG0CNT = BG_CBB(ACID_CHARBLOCK) | BG_SBB(ACID_SCREENBLOCK) | BG_4BPP | BG_REG_64x64;
     REG_DISPCNT = DCNT_MODE0 | DCNT_BG0;
-
-    // setting up the color of a mole
-    pal_bg_mem[PALETTE_MOLE_INDEX] = RGB15(0, 0, 31);
 }
 
 void setup_ppu_tests()
 {
     // - MOSAIC testing
     // setup a mole
-    // TODO: should we use constants for these indices into pal mem?
-    se_mem[30][32*10+10] = 32 * 10 + 10;
-    uint8_t* charblock = (uint8_t*) &tile_mem[10][10];
-
-    for (int x = 0; x < 8; x++)
-    for (int y = 0; y < 8; y++)
-    {
-        // we don't replace the (0, 0) index for charblock.
-        // mosaicing should copy this index into all the other
-        // indices.
-        if (x != 0 && y != 0)
-            charblock[x + 8 * y] = 0;
-    }
-    
+    // se_mem[ACID_SCREENBLOCK][MOSAIC_MOLE_TILE_X + MOSAIC_MOLE_TILE_Y * 32] = 33;
 }
 
-void main_loop() {
-    // let's idle around until vblank starts
-    while (REG_DISPSTAT | DSTAT_IN_VBL);
+inline void wait_for_hblank() 
+{
+    while ( (REG_DISPSTAT & DSTAT_IN_HBL));
+    while (!(REG_DISPSTAT & DSTAT_IN_HBL));
+}
 
-    while (true); // go brr
+inline void run_hblank_routine() 
+{
+    switch (REG_VCOUNT + 1) // vcount + 1 because any edits during the nth scanline's hblank would modify the (n + 1)th scanline
+    {
+        case 8 ... 16: // idk some dummy test to make sure this is working
+            REG_BG0HOFS = 256; // yeet
+            break;
+        
+        default:
+            REG_BG0HOFS = 0;
+            break;
+    }
+}
+void main_loop() 
+{
+    while (true) 
+    {
+        wait_for_hblank();
+        run_hblank_routine();
+    }
 }
 
 int main()
@@ -59,7 +82,7 @@ int main()
     // hi! if you're using this rom to debug, this is the function
     // you want to look at! :)
     setup_display();
-    // setup_ppu_tests();
+    setup_ppu_tests();
     
     main_loop();
 
